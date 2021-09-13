@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_modular/flutter_modular.dart' as m;
 
 import 'app_controller.dart';
 import 'app_widget.dart';
+
 import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
 import 'shared/components/loading_dialog.dart';
@@ -12,16 +13,16 @@ import 'shared/repositories/user_repository.dart';
 import 'shared/services/user_service.dart';
 import 'shared/stores/user_store.dart';
 
-class AppModule extends MainModule {
+class AppModule extends m.MainModule {
   @override
-  List<Bind> get binds => [
+  List<m.Bind> get binds => [
         $UserStore,
         $UserService,
         $UserRepository,
         $AppController,
         $CustomDio,
         $LoadingDialog,
-        Bind(
+        m.Bind(
           (i) => BaseOptions(
             baseUrl: 'http://192.168.15.15:3001/',
             connectTimeout: 5000,
@@ -30,13 +31,13 @@ class AppModule extends MainModule {
       ];
 
   @override
-  List<Router> get routers => [
-        Router(Modular.initialRoute, module: LoginModule()),
-        Router('/home', module: HomeModule()),
+  List<m.Router> get routers => [
+        m.Router(m.Modular.initialRoute, module: LoginModule()),
+        m.Router('/home', module: HomeModule()),
       ];
 
   @override
   Widget get bootstrap => AppWidget();
 
-  static Inject get to => Inject<AppModule>.of();
+  static m.Inject get to => m.Inject<AppModule>.of();
 }

@@ -44,7 +44,7 @@ dev_dependencies:
   effective_dart: ^1.2.4
   mockito: ^4.1.1
   mobx_codegen: 
-  build_runner:   
+  build_runner: any
   flutter_test:
     sdk: flutter
 
